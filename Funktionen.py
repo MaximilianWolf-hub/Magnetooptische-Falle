@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.optimize as opt
+import tifffile as tiff
 
 
 def gaussian_2D(XY, A, x0, y0, sigma_x, sigma_y):
@@ -23,3 +24,11 @@ def fit_gaussian_2D(image):
     ### 4. Curve Fit ausführen ###
     params, cov = opt.curve_fit(gaussian_2D, (xdata, ydata), zdata, p0=p0)
     return params
+
+def background_average(hintergrund):
+
+    average = []
+    for datei in hintergrund:
+        bild = tiff.imread(datei)
+        average.append(np.mean(bild))
+    return np.mean(average)
