@@ -5,7 +5,7 @@ import tifffile as tiff
 
 def gaussian_2D(XY, A, x0, y0, sigma_x, sigma_y):
     x, y = XY  # Entpacken der 2D-Koordinaten
-    return A * np.exp(-((x - x0) ** 2 / (2 * sigma_x ** 2) + (y - y0) ** 2 / (2 * sigma_y ** 2)))
+    return A * np.exp(-((x - x0)**2 / (2 * sigma_x**2) + (y - y0)**2 / (2 * sigma_y**2)))
 
 def fit_gaussian_2D(image):
     ny, nx = image.shape  # Bildgröße
@@ -19,7 +19,7 @@ def fit_gaussian_2D(image):
     zdata = image.ravel()
 
     ### 3. Startwerte für den Fit ###
-    p0 = [np.max(image), nx // 2, ny // 2, nx / 4, ny / 4]  # Schätzung für Parameter
+    p0 = [np.max(image), nx // 6, ny * 2 // 3, nx / 4, ny / 4]  # Schätzung für Parameter
 
     ### 4. Curve Fit ausführen ###
     params, cov = opt.curve_fit(gaussian_2D, (xdata, ydata), zdata, p0=p0)
@@ -28,7 +28,11 @@ def fit_gaussian_2D(image):
 def background_average(hintergrund):
 
     average = []
+    ny, nx = 0, 0
     for datei in hintergrund:
         bild = tiff.imread(datei)
         average.append(np.mean(bild))
-    return np.mean(average)
+        ny, nx = bild.shape  # Bildgröße
+    average = np.mean(average)
+    return np.full((ny, nx), average)
+
