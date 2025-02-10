@@ -1,6 +1,6 @@
 import numpy as np
 
-data = [203, 211.5, 196.3, 194.9, 247, 258, 229, 246.6]
+data = [79.3, 84.1, 75.9, 76.3, 74.3, 77.4, 69.6, 69.8]
 
 print(np.mean(data))
 print(np.std(data))
