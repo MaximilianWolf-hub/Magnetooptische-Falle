@@ -7,7 +7,7 @@ import os
 from PIL import Image
 
 ### 1. TIFF-Datei laden ###
-image = tiff.imread("tof_1.25ms_rep_0.tiff")  # Bild laden
+image = tiff.imread("../tof_1.25ms_rep_0.tiff")  # Bild laden
 ny, nx = image.shape  # Bildgröße
 x = np.arange(nx)
 y = np.arange(ny)

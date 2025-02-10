@@ -3,7 +3,7 @@ from uncertainties import ufloat
 import matplotlib.pyplot as plt
 import tifffile as tiff
 import glob
-from Funktionen import background_average, fit_gaussian_2D
+from Temperatur.Funktionen import background_average, fit_gaussian_2D
 import re
 from scipy.optimize import curve_fit
 
